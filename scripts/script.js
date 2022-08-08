@@ -23,7 +23,7 @@ function openAccordion() {
 function displaySwitcher(index) {
     console.log(contentArray.item(index));
     const currentContent = contentArray.item(index);
-    contentClassString = currentContent.getAttribute('class');
+    const contentClassString = currentContent.getAttribute('class');
     const class1 = 'invisible';
     const class2 = 'visible';
     
@@ -31,16 +31,40 @@ function displaySwitcher(index) {
     
     let subStrIndex = contentClassString.indexOf(class1);
     if ( subStrIndex !== -1) {
-        currentContent.setAttribute('class', contentClassString.substring(0, subStrIndex) + class2);
+        currentContent.setAttribute('class', removeClass(contentClassString, class1) + class2);
     } else {
         subStrIndex = contentClassString.indexOf(class2);
-        currentContent.setAttribute('class', contentClassString.substring(0, subStrIndex) + class1);
+        currentContent.setAttribute('class', removeClass(contentClassString, class2) + class1);
     }
     console.log(currentContent.getAttribute('class'));
 }
 
 function displayChecker(index) {
+    const currentContent = contentArray.item(index);
+    const classString = currentContent.getAttribute('class');
+    const class1 = 'invisible';
+    const class2 = 'visible';
 
+    contentArray.forEach(el => {
+        if (el !== currentContent) {
+            if (!(hasClass(classString, class1))) {
+                el.setAttribute('class', removeClass(classString, class2) + class1);
+            }
+        }
+    });
+}
+
+function hasClass (classString, c) {
+    searchIndex = classString.indexOf(c);
+    if ( searchIndex !== -1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function removeClass (classString, c) {
+    return classString.substring(0, classString.indexOf(c));
 }
 
 buttonArray.forEach(el => el.addEventListener('click', openAccordion));
