@@ -101,10 +101,6 @@ body {
     cursor: pointer;
 }
 
-.accordion-content {
-    display: none;
-}
-
 .accordion-title,
 .button-icon {
     display: block;
@@ -134,4 +130,12 @@ body {
 
 .accordion-button:focus .button-icon {
     transform: rotateX(180deg);
+}
+
+.invisible {
+    display: none;
+}
+
+.visible {
+    display: block;
 }
